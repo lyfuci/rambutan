@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="rambutan-model.main" target="12" />
+      <module name="rambutan-model.test" target="12" />
+      <module name="rumbutan.rambutan-entrypoint.main" target="12" />
+      <module name="rumbutan.rambutan-entrypoint.test" target="12" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

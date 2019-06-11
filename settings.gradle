@@ -1,0 +1,6 @@
+rootProject.name = 'rumbutan'
+
+include ':rambutan-model'
+include ':rambutan-service'
+include ':rambutan-autoconfig'
+include ':rambutan-spring-boot-starter'

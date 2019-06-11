@@ -1,0 +1,76 @@
+buildscript {
+    ext {
+        kotlinVersion = '1.3.31'
+        springBootVersion = '2.1.5.RELEASE'
+        wxJavaVersion = '3.4.0'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
+        classpath("org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}")
+    }
+}
+
+allprojects {
+    group 'xyz.seansun.rumbutan'
+    version '1.0.0-SNAPSHOT'
+
+    apply plugin: 'kotlin'
+    apply plugin: 'kotlin-spring'
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'maven'
+    apply plugin: 'maven-publish'
+
+
+    dependencyManagement {
+        imports {
+            mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
+        }
+    }
+
+    dependencies{
+
+        implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation 'org.springframework.boot:spring-boot-starter-security'
+        implementation 'com.github.binarywang:weixin-java-mp'
+
+        constraints{
+            compile "com.github.binarywang:weixin-java-mp:${wxJavaVersion}"
+        }
+    }
+
+    compileKotlin {
+        kotlinOptions {
+            freeCompilerArgs = ["-Xjsr305=strict"]
+            jvmTarget = JavaVersion.VERSION_1_8
+        }
+    }
+
+    compileTestKotlin {
+        kotlinOptions {
+            freeCompilerArgs = ["-Xjsr305=strict"]
+            jvmTarget = JavaVersion.VERSION_1_8
+        }
+    }
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencyManagement {
+        imports { mavenBom("org.springframework.boot:spring-boot-dependencies:${springBootVersion}") }
+    }
+
+}
+
+dependencies {
+    compile project(':rambutan-model')
+    compile project(':rambutan-service')
+    compile project(':rambutan-autoconfig')
+    compile project(':rambutan-spring-boot-starter')
+}
+

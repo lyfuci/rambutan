@@ -1,5 +1,3 @@
 dependencies {
-    implementation project(':rambutan-autoconfig')
-    
-    
+    compile project(':rambutan-autoconfig')
 }

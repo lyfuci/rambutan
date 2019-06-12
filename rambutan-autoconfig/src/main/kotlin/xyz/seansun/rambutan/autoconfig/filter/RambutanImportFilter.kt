@@ -1,5 +1,6 @@
 package xyz.seansun.rambutan.autoconfig.filter
 
+import org.apache.juli.logging.LogFactory
 import org.springframework.boot.autoconfigure.AutoConfigurationImportFilter
 import org.springframework.boot.autoconfigure.AutoConfigurationMetadata
 
@@ -9,20 +10,21 @@ import org.springframework.boot.autoconfigure.AutoConfigurationMetadata
  */
 class RambutanImportFilter : AutoConfigurationImportFilter {
 
-    override fun match(
-        autoConfigurationClasses: Array<out String>?,
-        autoConfigurationMetadata: AutoConfigurationMetadata?
-    ): BooleanArray {
-        return autoConfigurationClasses!!.asSequence()
-            .map { !TO_EXCLUDE.contains(it) }
-            .toList()
-            .toBooleanArray()
-    }
+    val log = LogFactory.getLog(javaClass)
 
     companion object {
         val TO_EXCLUDE =
             listOf("org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration")
     }
 
+    override fun match(
+        autoConfigurationClasses: Array<String?>?,
+        autoConfigurationMetadata: AutoConfigurationMetadata?
+    ): BooleanArray? {
+        return autoConfigurationClasses!!.asSequence()
+            .map { !TO_EXCLUDE.contains(it) }
+            .toList()
+            .toBooleanArray()
+    }
 
 }

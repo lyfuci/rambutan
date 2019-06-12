@@ -9,9 +9,10 @@ import javax.servlet.http.HttpServletRequest
 class ServletUtils {
     companion object {
         private const val unknown = "unknown"
-        fun getIpAddress(request: HttpServletRequest): String {
+        fun getIpAddress(request: HttpServletRequest): String? {
             return sequenceOf(
                 "x-forwarded-for",
+                "X-Real-Ip",
                 "Proxy-Client-IP",
                 "WL-Proxy-Client-IP",
                 "HTTP_CLIENT_IP",
@@ -20,7 +21,7 @@ class ServletUtils {
                 !request.getHeader(it).isNullOrEmpty() && unknown != request.getHeader(it)
             }
                 .map { request.getHeader(it) }
-                .first()
+                .firstOrNull()
                 ?: request.remoteAddr
                 ?: unknown
         }

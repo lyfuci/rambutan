@@ -1,6 +1,6 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   xyz.seansun.rambutan.autoconfig.wxmp.WxMpAutoConfig,\
   xyz.seansun.rambutan.autoconfig.http.HttpClientAutoConfig
-org.springframework.boot.autoconfigure.AutoConfigurationExcludeFilter=\
+org.springframework.boot.autoconfigure.AutoConfigurationImportFilter=\
   xyz.seansun.rambutan.autoconfig.filter.RambutanImportFilter
 

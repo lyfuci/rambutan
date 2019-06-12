@@ -54,7 +54,7 @@ class JedisStorageConfig {
 
         if (wxMpProp.httpProxyEnable) {
             wxMpConfigStorage.httpProxyHost = wxMpProp.httpProxyHost
-            wxMpConfigStorage.httpProxyPort = wxMpProp.httpProxyPort
+            wxMpConfigStorage.httpProxyPort = wxMpProp.httpProxyPort ?: 8080
             wxMpConfigStorage.httpProxyUsername = wxMpProp.httpProxyUsername
             wxMpConfigStorage.httpProxyPassword = wxMpProp.httpProxyPassword
         }

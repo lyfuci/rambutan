@@ -16,7 +16,7 @@ import xyz.seansun.rambutan.service.impl.DefaultWxMpMessageEntrypointService
  * on : 2019/6/9 12:28
  */
 @Configuration
-@ConditionalOnProperty(prefix = "wechat.mp", name = ["token", "aes-key", "entrypoint-url"])
+@ConditionalOnProperty(prefix = "wechat.mp", name = ["token", "entrypoint-url"])
 @ConditionalOnBean(WxMpService::class)
 class EntryPointAutoConfig {
     private val log = LogFactory.getLog(javaClass)
@@ -24,7 +24,7 @@ class EntryPointAutoConfig {
     @Bean
     @ConditionalOnMissingBean(WxMpMessageRouter::class)
     fun wxMpMessageRouter(wxMpService: WxMpService): WxMpMessageRouter {
-        log.debug("initialing WxMpMessageRouter...")
+        log.info("initialing WxMpMessageRouter...")
         return WxMpMessageRouter(wxMpService)
     }
 
@@ -34,7 +34,7 @@ class EntryPointAutoConfig {
         wxMpService: WxMpService,
         wxMpMessageRouter: WxMpMessageRouter
     ): WxMpMessageEntrypointService {
-        log.debug("initialing DefaultWechatWorkService...")
+        log.info("initialing wxMpMessageEntrypointService...")
         return DefaultWxMpMessageEntrypointService(wxMpService, wxMpMessageRouter)
     }
 

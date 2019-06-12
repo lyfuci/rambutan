@@ -44,30 +44,34 @@ class WxMpSecurityConfig : WebSecurityConfigurerAdapter() {
     @Bean
     @ConditionalOnMissingBean(AuthenticationFailureHandler::class)
     fun authenticationFailureHandler(): AuthenticationFailureHandler {
+        log.debug("initialing authenticationFailureHandler")
         return RumbutanAuthenticationFailureHandler()
     }
 
     @Bean
     @ConditionalOnMissingBean(AccessDeniedHandler::class)
     fun accessDeniedHandler(): AccessDeniedHandler {
+        log.debug("initialing accessDeniedHandler")
         return RumbutanAccessDeniedHandler()
     }
 
     @Bean
     @ConditionalOnMissingBean(AuthenticationEntryPoint::class)
     fun authenticationEntryPoint(): AuthenticationEntryPoint {
+        log.debug("initialing authenticationEntryPoint")
         return RambutanAuthenticationEntryPoint()
     }
 
     @Bean
     @ConditionalOnMissingBean(AuthenticationSuccessHandler::class)
     fun authenticationSuccessHandler(): AuthenticationSuccessHandler {
+        log.debug("initialing authenticationSuccessHandler")
         return RumbutanAuthenticationSuccessHandler()
     }
 
     @Throws(Exception::class)
     public override fun configure(http: HttpSecurity) {
-
+        log.info("configuring spring security")
         http
             .logout().disable()
             .httpBasic().disable()
@@ -75,7 +79,6 @@ class WxMpSecurityConfig : WebSecurityConfigurerAdapter() {
             .exceptionHandling()
             .authenticationEntryPoint(authenticationEntryPoint())
             .accessDeniedHandler(accessDeniedHandler())
-
         if (wxMpProp.authentication.enable) {
 
             //处理post情况下错误信息乱码
@@ -84,10 +87,10 @@ class WxMpSecurityConfig : WebSecurityConfigurerAdapter() {
             encodingFilter.setForceEncoding(true)
             http.addFilterBefore(encodingFilter, CsrfFilter::class.java)
 
-            if (wxMpProp.authentication.loginPaths.isNotEmpty()) {
+            if (!wxMpProp.authentication.loginPaths.isNullOrEmpty()) {
 
 
-                for (urlPattern in wxMpProp.authentication.loginPaths) {
+                for (urlPattern in wxMpProp.authentication.loginPaths!!) {
                     //添加登录方式和处理器
 
                     val lycheeCodeAuthenticationFilter = if (ObjectUtils.isEmpty(urlPattern.method)) {
@@ -111,8 +114,8 @@ class WxMpSecurityConfig : WebSecurityConfigurerAdapter() {
                 }
             }
 
-            if (!ObjectUtils.isEmpty(wxMpProp.authentication.authenticationExcludePaths)) {
-                for (request in wxMpProp.authentication.authenticationExcludePaths) {
+            if (!wxMpProp.authentication.authenticationExcludePaths.isNullOrEmpty()) {
+                for (request in wxMpProp.authentication.authenticationExcludePaths!!) {
                     http.authorizeRequests()
                         .antMatchers(request.method, request.url)
                         .permitAll()
@@ -122,7 +125,7 @@ class WxMpSecurityConfig : WebSecurityConfigurerAdapter() {
 
             if (!ObjectUtils.isEmpty(wxMpProp.authentication.authenticationRequiredPaths)) {
 
-                for (request in wxMpProp.authentication.authenticationRequiredPaths) {
+                for (request in wxMpProp.authentication.authenticationRequiredPaths!!) {
                     http.authorizeRequests()
                         .antMatchers(request.method, request.url)
                         .authenticated()

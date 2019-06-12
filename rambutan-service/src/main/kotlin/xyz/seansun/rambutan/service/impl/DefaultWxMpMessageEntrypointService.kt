@@ -25,14 +25,17 @@ class DefaultWxMpMessageEntrypointService(
     ): String {
         log.debug("接收到来自微信服务器的认证消息：[signature = $signature, timestamp = $timestamp, nonce = $nonce, echoStr = $echoStr]")
         //没有字段为空，并且签名检验合法
-        if (StringUtils.isNoneBlank(signature, timestamp, nonce, echoStr) &&
+        return if (StringUtils.isNoneBlank(signature, timestamp, nonce, echoStr) &&
             wxMpService.checkSignature(timestamp, nonce, signature)
         ) {
             // 消息签名不正确，说明不是公众平台发过来的消息
-            return "echoStr"
+            log.debug("校验通过")
+            echoStr ?: "success"
+        } else {
+            log.debug("非法请求")
+            return "error"
         }
-        log.debug("非法请求")
-        return "error"
+
     }
 
     override fun dealMsg(

@@ -20,13 +20,17 @@ class InMemoryStorageConfig {
         val wxMpInMemoryConfigStorage = WxMpInMemoryConfigStorage()
         wxMpInMemoryConfigStorage.appId = wxMpProp.appId
         wxMpInMemoryConfigStorage.secret = wxMpProp.secret
-        wxMpInMemoryConfigStorage.aesKey = wxMpProp.aesKey
-        wxMpInMemoryConfigStorage.token = wxMpProp.token
+        wxMpProp.aesKey?.let {
+            wxMpInMemoryConfigStorage.aesKey = it
+        }
+        wxMpProp.token?.let {
+            wxMpInMemoryConfigStorage.token = it
+        }
 
         wxMpInMemoryConfigStorage.oauth2redirectUri = wxMpInMemoryConfigStorage.oauth2redirectUri
         if (wxMpProp.httpProxyEnable) {
             wxMpInMemoryConfigStorage.httpProxyHost = wxMpProp.httpProxyHost
-            wxMpInMemoryConfigStorage.httpProxyPort = wxMpProp.httpProxyPort
+            wxMpInMemoryConfigStorage.httpProxyPort = wxMpProp.httpProxyPort ?: 8080
             wxMpInMemoryConfigStorage.httpProxyUsername = wxMpProp.httpProxyUsername
             wxMpInMemoryConfigStorage.httpProxyPassword = wxMpProp.httpProxyPassword
         }

@@ -1,7 +1,6 @@
 package xyz.seansun.rambutan.properties
 
 import org.springframework.boot.context.properties.ConfigurationProperties
-import java.net.Proxy
 
 
 /**
@@ -9,11 +8,10 @@ import java.net.Proxy
  * on : 2019/6/8 18:45
  */
 @ConfigurationProperties("http-client")
-data class HttpClientProp(
-    var proxyEnable: Boolean,
-    var proxyIp: String,
-    var proxyPort: Int,
-    var proxyType: Proxy.Type,
-    var connectionTimeout: Int,
-    var readTime: Int
-)
+class HttpClientProp {
+    var proxyEnable: Boolean = false
+    var proxyIp: String = "localhost"
+    var proxyPort: Int = 8080
+    var connectionTimeout: Int = 1000
+    var readTime: Int = 1000
+}

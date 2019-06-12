@@ -20,9 +20,9 @@ import javax.servlet.http.HttpServletResponse
 class RumbutanCodeAuthenticationFilter :
     AbstractAuthenticationProcessingFilter {
 
-    constructor(urlPattern: String) : super(AntPathRequestMatcher(urlPattern))
+    constructor(urlPattern: String?) : super(AntPathRequestMatcher(urlPattern))
 
-    constructor (urlPattern: String, httpMethod: String) : super(AntPathRequestMatcher(urlPattern, httpMethod))
+    constructor (urlPattern: String?, httpMethod: String) : super(AntPathRequestMatcher(urlPattern, httpMethod))
 
     private val log = LogFactory.getLog(javaClass)
 
@@ -39,6 +39,7 @@ class RumbutanCodeAuthenticationFilter :
             )
         }
         if (SecurityContextHolder.getContext()?.authentication?.isAuthenticated == true) {
+            log.debug("already loged in, use exist authentication.")
             return SecurityContextHolder.getContext().authentication
         }
         var oauth2Code: String? = obtainOauth2Code(request!!)
@@ -70,7 +71,7 @@ class RumbutanCodeAuthenticationFilter :
         val detail = HashMap<String, String>()
         detail["X-Real-IP"] = request.getHeader("X-Real-IP")
         detail["X-Forwarded-For"] = request.getHeader("X-Forwarded-For")
-        detail["IP"] = ServletUtils.getIpAddress(request)
+        detail["IP"] = ServletUtils.getIpAddress(request) ?: "unknown"
         detail["SESSION-ID"] = request.getSession(false)?.id ?: "unknown"
 
         authRequest.details = detail

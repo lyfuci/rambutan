@@ -1,7 +1,7 @@
 package xyz.seansun.rambutan.model
 
 import me.chanjar.weixin.mp.bean.result.WxMpUser
-import org.apache.juli.logging.LogFactory
+import org.apache.commons.logging.LogFactory
 import org.springframework.security.authentication.AbstractAuthenticationToken
 
 /**

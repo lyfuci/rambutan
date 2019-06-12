@@ -1,24 +1,30 @@
 buildscript {
-    ext {
-        kotlinVersion = '1.3.31'
-        springBootVersion = '2.1.5.RELEASE'
-        wxJavaVersion = '3.4.0'
-    }
     repositories {
         mavenCentral()
     }
+    ext['kotlin.version']= '1.3.31'
+    ext {
+        kotlin_version = '1.3.31'
+        spring_boot_version = '2.1.5.RELEASE'
+        wx_java_version = '3.4.0'
+        kotlin_jackson_version='2.9.+'
+    }
+
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
-        classpath("org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}")
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-allopen:$kotlin_version"
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:$spring_boot_version"
     }
 }
 
+
+
 allprojects {
-    group 'xyz.seansun.rumbutan'
+    group 'xyz.seansun'
     version '1.0.0-SNAPSHOT'
 
     apply plugin: 'kotlin'
+    apply plugin: 'kotlin-kapt'
     apply plugin: 'kotlin-spring'
     apply plugin: 'io.spring.dependency-management'
     apply plugin: 'maven'
@@ -33,14 +39,11 @@ allprojects {
 
     dependencies{
 
-        implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-        implementation 'org.springframework.boot:spring-boot-starter-web'
-        implementation 'org.springframework.boot:spring-boot-starter-security'
-        implementation 'com.github.binarywang:weixin-java-mp'
+        compileOnly "org.springframework.boot:spring-boot-starter-webflux"
+        compileOnly "redis.clients:jedis"
 
-        constraints{
-            compile "com.github.binarywang:weixin-java-mp:${wxJavaVersion}"
-        }
+        kapt "org.springframework.boot:spring-boot-configuration-processor"
+
     }
 
     compileKotlin {
@@ -61,16 +64,5 @@ allprojects {
         mavenCentral()
     }
 
-    dependencyManagement {
-        imports { mavenBom("org.springframework.boot:spring-boot-dependencies:${springBootVersion}") }
-    }
-
-}
-
-dependencies {
-    compile project(':rambutan-model')
-    compile project(':rambutan-service')
-    compile project(':rambutan-autoconfig')
-    compile project(':rambutan-spring-boot-starter')
 }
 

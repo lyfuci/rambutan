@@ -2,7 +2,7 @@ package xyz.seansun.rambutan.autoconfig.wxmp.basic
 
 import me.chanjar.weixin.mp.api.WxMpConfigStorage
 import me.chanjar.weixin.mp.api.WxMpService
-import me.chanjar.weixin.mp.api.impl.WxMpServiceOkHttpImpl
+import me.chanjar.weixin.mp.api.impl.WxMpServiceImpl
 import org.apache.juli.logging.LogFactory
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
@@ -23,7 +23,7 @@ class WxMpBasicAutoConfig {
     @ConditionalOnMissingBean(WxMpService::class)
     fun wxMpService(wxMpConfigStorage: WxMpConfigStorage): WxMpService {
         log.info("initializing wxMpService bean...")
-        val wxMpService = WxMpServiceOkHttpImpl()
+        val wxMpService = WxMpServiceImpl()
         wxMpService.wxMpConfigStorage = wxMpConfigStorage
         return wxMpService
     }

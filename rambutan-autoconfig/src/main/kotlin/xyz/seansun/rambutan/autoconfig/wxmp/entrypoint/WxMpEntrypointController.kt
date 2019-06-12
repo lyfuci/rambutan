@@ -14,7 +14,7 @@ import javax.annotation.Resource
 class WxMpEntrypointController {
 
     @Resource
-    private lateinit var wxMpMessageEntrypointService: WxMpMessageEntrypointService
+    lateinit var wxMpMessageEntrypointService: WxMpMessageEntrypointService
 
     /**
      * 微信校验接口
@@ -36,8 +36,8 @@ class WxMpEntrypointController {
     fun dealMsg(
         @RequestBody requestBody: String,
         @RequestParam("signature") signature: String,
-        @RequestParam(name = "encrypt_type", required = false) encType: String,
-        @RequestParam(name = "msg_signature", required = false) msgSignature: String,
+        @RequestParam(name = "encrypt_type", required = false) encType: String?,
+        @RequestParam(name = "msg_signature", required = false) msgSignature: String?,
         @RequestParam("timestamp") timestamp: String,
         @RequestParam("nonce") nonce: String
     ): Any {

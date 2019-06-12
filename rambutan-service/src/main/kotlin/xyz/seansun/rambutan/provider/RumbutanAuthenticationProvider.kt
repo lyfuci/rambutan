@@ -33,9 +33,9 @@ class RumbutanAuthenticationProvider(val wxMpService: WxMpService) : Authenticat
             throw AuthenticationServiceException("数据请求异常，请联系管理员")
         }
 
-        if (wxMpUser.subscribe != true) {
-            throw AuthenticationServiceException("用户已被禁用或者数据不完整")
-        }
+//        if (wxMpUser.subscribe != true) {
+//            throw AuthenticationServiceException("用户已被禁用或者数据不完整")
+//        }
 
         //通过校验构造token
         val authenticationResult = WxMpToken(wxMpUser)

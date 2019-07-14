@@ -2,12 +2,14 @@ package xyz.seansun.rambutan.autoconfig.wxmp.basic
 
 import me.chanjar.weixin.mp.api.WxMpConfigStorage
 import me.chanjar.weixin.mp.api.WxMpInRedisConfigStorage
+import org.slf4j.LoggerFactory
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.util.ObjectUtils
 import redis.clients.jedis.JedisPool
 import redis.clients.jedis.JedisPoolConfig
 import xyz.seansun.rambutan.properties.WxMpProp
@@ -23,6 +25,7 @@ import java.time.temporal.ChronoUnit.NANOS
 @EnableConfigurationProperties(RedisProperties::class)
 class JedisStorageConfig {
 
+    private val log = LoggerFactory.getLogger(javaClass)
 
     @Bean
     @ConditionalOnMissingBean(JedisPool::class)
@@ -44,6 +47,10 @@ class JedisStorageConfig {
     @Bean
     @ConditionalOnMissingBean(WxMpConfigStorage::class)
     fun wxMpConfigStorage(wxMpProp: WxMpProp, jedisPool: JedisPool): WxMpConfigStorage {
+        log.debug("WxMpInRedisConfigStorage initializing")
+        if (ObjectUtils.isEmpty(wxMpProp.appId) || ObjectUtils.isEmpty(wxMpProp.secret)) {
+            throw RuntimeException("appid、secret都不能为空")
+        }
         val wxMpConfigStorage = WxMpInRedisConfigStorage(jedisPool)
 
         wxMpConfigStorage.appId = wxMpProp.appId

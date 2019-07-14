@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import io.netty.channel.ChannelOption
 import io.netty.handler.timeout.ReadTimeoutHandler
 import io.netty.handler.timeout.WriteTimeoutHandler
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.AutoConfigureAfter
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean
@@ -41,13 +42,14 @@ import java.nio.charset.StandardCharsets
 @EnableConfigurationProperties(HttpClientProp::class)
 class HttpClientAutoConfig {
 
+    private val log = LoggerFactory.getLogger(javaClass)
     @Autowired
     private lateinit var objectMapper: ObjectMapper
 
     @Bean
     @ConditionalOnMissingBean
     fun webClient(httpClientProp: HttpClientProp): WebClient {
-
+        log.debug("WebClient initialing")
         val httpClient: HttpClient
         if (httpClientProp.proxyEnable) {
             httpClient = HttpClient.create()

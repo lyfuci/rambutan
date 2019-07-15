@@ -28,7 +28,7 @@ class RumbutanOpenIdAuthenticationProvider(val wxMpService: WxMpService) : Authe
 
         //有授权码的请况下直接获取用户相关的信息
         log.debug("使用 openId [${authentication.principal}] 获取用户基本信息")
-        var user: WxMpUser? = null
+        val user: WxMpUser?
         try {
             user = wxMpService.userService.userInfo(authentication.principal as String)
         } catch (e: WxErrorException) {

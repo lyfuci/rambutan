@@ -44,7 +44,7 @@ abstract class RumbutanAuthFilter : AbstractAuthenticationProcessingFilter {
         authRequest: WxMpStringToken
     ) {
 
-        val detail = HashMap<String, String>()
+        val detail = HashMap<String, String?>()
         detail["X-Real-IP"] = request.getHeader("X-Real-IP")
         detail["X-Forwarded-For"] = request.getHeader("X-Forwarded-For")
         detail["IP"] = ServletUtils.getIpAddress(request) ?: "unknown"

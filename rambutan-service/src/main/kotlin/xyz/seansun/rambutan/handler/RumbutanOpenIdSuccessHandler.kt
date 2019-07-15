@@ -21,7 +21,7 @@ class RumbutanOpenIdSuccessHandler(val mapper: ObjectMapper) : AuthenticationSuc
     ) {
         response!!.contentType = MediaType.APPLICATION_JSON_UTF8_VALUE
         val result = String.format(
-            "{ \"code\": 0,  \"msg\": \"success\", \"dana\": %s  }",
+            "{ \"code\": 0,  \"msg\": \"success\", \"data\": %s  }",
             mapper.writeValueAsString(authentication?.principal)
         )
         response.writer.write(result)

@@ -29,9 +29,7 @@ class RumbutanOpenIdAuthenticationFilter : RumbutanAuthFilter {
         var openId = obtainOpenId(request!!)
 
         if (openId.isNullOrBlank()) {
-            log.error(
-                "参数为null，可能为伪造请求,该请求的X-Forwarded-For为[${request.getHeader("X-Forwarded-For")}],IP为[${request.remoteAddr}}]"
-            )
+            log.error("参数为null，可能为伪造请求,该请求的X-Forwarded-For为[${request.getHeader("X-Forwarded-For")}],IP为[${request.remoteAddr}}]")
             throw InsufficientAuthenticationException("request not comes from wechat, we have record your IP address to prevent bad behavior")
         }
 

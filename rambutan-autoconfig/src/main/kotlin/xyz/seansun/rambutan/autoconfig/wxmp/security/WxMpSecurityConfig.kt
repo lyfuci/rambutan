@@ -71,7 +71,7 @@ class WxMpSecurityConfig : WebSecurityConfigurerAdapter() {
     }
 
     @Bean
-    @ConditionalOnProperty(prefix = "wechat.mp.authentication", name = ["enableOpenIdLogin"])
+    @ConditionalOnProperty(prefix = "wechat.mp.authentication", name = ["enable-open-id-login"])
     @ConditionalOnMissingBean(RumbutanOpenIdSuccessHandler::class)
     fun rumbutanOpenIdSuccessHandler(): RumbutanOpenIdSuccessHandler {
         log.debug("initialing OpenIdSuccessHandler")

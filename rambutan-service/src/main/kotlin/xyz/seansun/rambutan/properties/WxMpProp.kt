@@ -64,11 +64,11 @@ class WxMpProp {
         /**
          * 是否开启用户手动使用openId登录功能,常用来测试调试, 生产环境请务必关闭此功能
          */
-        val enableOpenIdLogin: Boolean = false
+        var enableOpenIdLogin: Boolean = false
         /**
          * openId登录的路径
          */
-        val openIdLoginPath: String = "/we/cheerUp"
+        var openIdLoginPath: String = "/we/cheerUp"
         /**
          * 具有登录功能的路径
          * 必须手动指定登录路径（应该和微信菜单项一致）

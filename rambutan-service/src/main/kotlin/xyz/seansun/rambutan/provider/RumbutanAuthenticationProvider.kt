@@ -6,7 +6,7 @@ import org.springframework.security.authentication.AuthenticationProvider
 import org.springframework.security.authentication.AuthenticationServiceException
 import org.springframework.security.core.Authentication
 import org.springframework.util.ObjectUtils
-import xyz.seansun.rambutan.model.WxMpToken
+import xyz.seansun.rambutan.model.WxMpOauthCodeToken
 
 /**
  * created by <a href="mailto:1194458432@qq.com" > lyfuci </a>
@@ -17,7 +17,7 @@ class RumbutanAuthenticationProvider(val wxMpService: WxMpService) : Authenticat
 
     override fun authenticate(authentication: Authentication?): Authentication {
         //获取过滤器封装的token信息
-        val authenticationToken = authentication as WxMpToken
+        val authenticationToken = authentication as WxMpOauthCodeToken
 
         //有授权码的请况下直接获取用户相关的信息
         log.debug("使用 code[{}] 获取token", authentication.principal)
@@ -33,12 +33,8 @@ class RumbutanAuthenticationProvider(val wxMpService: WxMpService) : Authenticat
             throw AuthenticationServiceException("数据请求异常，请联系管理员")
         }
 
-//        if (wxMpUser.subscribe != true) {
-//            throw AuthenticationServiceException("用户已被禁用或者数据不完整")
-//        }
-
         //通过校验构造token
-        val authenticationResult = WxMpToken(wxMpUser)
+        val authenticationResult = WxMpOauthCodeToken(wxMpUser)
         authenticationResult.details = authenticationToken.details
 
         return authenticationResult
@@ -46,7 +42,7 @@ class RumbutanAuthenticationProvider(val wxMpService: WxMpService) : Authenticat
     }
 
     override fun supports(authentication: Class<*>?): Boolean {
-        return WxMpToken::class.java.isAssignableFrom(authentication)
+        return WxMpOauthCodeToken::class.java.isAssignableFrom(authentication)
     }
 
 

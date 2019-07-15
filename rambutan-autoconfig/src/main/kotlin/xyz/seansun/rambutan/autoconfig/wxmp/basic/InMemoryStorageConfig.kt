@@ -2,9 +2,11 @@ package xyz.seansun.rambutan.autoconfig.wxmp.basic
 
 import me.chanjar.weixin.mp.api.WxMpConfigStorage
 import me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage
+import org.slf4j.LoggerFactory
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.util.ObjectUtils
 import xyz.seansun.rambutan.properties.WxMpProp
 
 /**
@@ -14,9 +16,15 @@ import xyz.seansun.rambutan.properties.WxMpProp
 @Configuration
 class InMemoryStorageConfig {
 
+    private val log = LoggerFactory.getLogger(javaClass)
+
     @Bean
     @ConditionalOnMissingBean(WxMpConfigStorage::class)
     fun wxMpConfigStorage(wxMpProp: WxMpProp): WxMpConfigStorage {
+        log.debug("WxMpInMemoryConfigStorage initializing")
+        if (ObjectUtils.isEmpty(wxMpProp.appId) || ObjectUtils.isEmpty(wxMpProp.secret)) {
+            throw RuntimeException("appid、secret都不能为空")
+        }
         val wxMpInMemoryConfigStorage = WxMpInMemoryConfigStorage()
         wxMpInMemoryConfigStorage.appId = wxMpProp.appId
         wxMpInMemoryConfigStorage.secret = wxMpProp.secret
@@ -27,7 +35,6 @@ class InMemoryStorageConfig {
             wxMpInMemoryConfigStorage.token = it
         }
 
-        wxMpInMemoryConfigStorage.oauth2redirectUri = wxMpInMemoryConfigStorage.oauth2redirectUri
         if (wxMpProp.httpProxyEnable) {
             wxMpInMemoryConfigStorage.httpProxyHost = wxMpProp.httpProxyHost
             wxMpInMemoryConfigStorage.httpProxyPort = wxMpProp.httpProxyPort ?: 8080

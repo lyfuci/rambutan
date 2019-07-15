@@ -12,14 +12,14 @@ import javax.servlet.http.HttpServletResponse
  */
 class RumbutanAuthenticationFailureHandler : AuthenticationFailureHandler {
 
-    val log = LogFactory.getLog(javaClass)
+    private val log = LogFactory.getLog(javaClass)
     override fun onAuthenticationFailure(
         request: HttpServletRequest?,
         response: HttpServletResponse?,
-        exception: AuthenticationException?
+        exception: AuthenticationException
     ) {
         log.error("登录失败", exception)
-        response!!.writer.write("login failed.")
+        response!!.writer.write(exception.message ?: "登录失败")
     }
 
 }

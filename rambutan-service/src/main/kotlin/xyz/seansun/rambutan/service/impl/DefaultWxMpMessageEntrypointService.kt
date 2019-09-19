@@ -4,7 +4,7 @@ import me.chanjar.weixin.mp.api.WxMpMessageRouter
 import me.chanjar.weixin.mp.api.WxMpService
 import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage
 import org.apache.commons.lang3.StringUtils
-import org.apache.juli.logging.LogFactory
+import org.slf4j.LoggerFactory
 import xyz.seansun.rambutan.service.WxMpMessageEntrypointService
 
 
@@ -16,7 +16,7 @@ class DefaultWxMpMessageEntrypointService(
     private val wxMpService: WxMpService,
     private val wxMpMessageRouter: WxMpMessageRouter
 ) : WxMpMessageEntrypointService {
-    private val log = LogFactory.getLog(javaClass)
+    private val log = LoggerFactory.getLogger(javaClass)
     override fun verifySignature(
         signature: String?,
         timestamp: String?,

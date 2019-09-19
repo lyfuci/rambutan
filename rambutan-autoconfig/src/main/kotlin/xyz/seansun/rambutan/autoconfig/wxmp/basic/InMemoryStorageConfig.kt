@@ -1,7 +1,7 @@
 package xyz.seansun.rambutan.autoconfig.wxmp.basic
 
-import me.chanjar.weixin.mp.api.WxMpConfigStorage
-import me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage
+import me.chanjar.weixin.mp.config.WxMpConfigStorage
+import me.chanjar.weixin.mp.config.impl.WxMpDefaultConfigImpl
 import org.slf4j.LoggerFactory
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.context.annotation.Bean
@@ -25,7 +25,7 @@ class InMemoryStorageConfig {
         if (ObjectUtils.isEmpty(wxMpProp.appId) || ObjectUtils.isEmpty(wxMpProp.secret)) {
             throw RuntimeException("appid、secret都不能为空")
         }
-        val wxMpInMemoryConfigStorage = WxMpInMemoryConfigStorage()
+        val wxMpInMemoryConfigStorage = WxMpDefaultConfigImpl()
         wxMpInMemoryConfigStorage.appId = wxMpProp.appId
         wxMpInMemoryConfigStorage.secret = wxMpProp.secret
         wxMpProp.aesKey?.let {

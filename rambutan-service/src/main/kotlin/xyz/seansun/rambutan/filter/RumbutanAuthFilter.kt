@@ -1,6 +1,6 @@
 package xyz.seansun.rambutan.filter
 
-import org.apache.juli.logging.LogFactory
+import org.slf4j.LoggerFactory
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher
 import xyz.seansun.rambutan.model.WxMpStringToken
@@ -22,7 +22,7 @@ abstract class RumbutanAuthFilter : AbstractAuthenticationProcessingFilter {
         )
     )
 
-    private val log = LogFactory.getLog(javaClass)
+    private val log = LoggerFactory.getLogger(javaClass)
 
     companion object {
         private const val SPRING_SECURITY_PARAM_CODE_KEY = "code"

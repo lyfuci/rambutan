@@ -1,6 +1,6 @@
 package xyz.seansun.rambutan.autoconfig.filter
 
-import org.apache.juli.logging.LogFactory
+import org.slf4j.LoggerFactory
 import org.springframework.boot.autoconfigure.AutoConfigurationImportFilter
 import org.springframework.boot.autoconfigure.AutoConfigurationMetadata
 
@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.AutoConfigurationMetadata
  */
 class RambutanImportFilter : AutoConfigurationImportFilter {
 
-    val log = LogFactory.getLog(javaClass)
+    private val log = LoggerFactory.getLogger(javaClass)
 
     companion object {
         val TO_EXCLUDE =

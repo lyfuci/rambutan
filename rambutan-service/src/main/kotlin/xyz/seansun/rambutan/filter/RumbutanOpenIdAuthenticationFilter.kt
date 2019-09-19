@@ -1,6 +1,6 @@
 package xyz.seansun.rambutan.filter
 
-import org.apache.juli.logging.LogFactory
+import org.slf4j.LoggerFactory
 import org.springframework.security.authentication.AuthenticationServiceException
 import org.springframework.security.authentication.InsufficientAuthenticationException
 import org.springframework.security.core.Authentication
@@ -17,7 +17,7 @@ class RumbutanOpenIdAuthenticationFilter : RumbutanAuthFilter {
 
     constructor (urlPattern: String?, httpMethod: String) : super(urlPattern, httpMethod)
 
-    private val log = LogFactory.getLog(javaClass)
+    private val log = LoggerFactory.getLogger(javaClass)
 
     override fun attemptAuthentication(request: HttpServletRequest?, response: HttpServletResponse?): Authentication {
         if (postOnly && request!!.method != "POST") {

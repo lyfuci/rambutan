@@ -1,9 +1,9 @@
 package xyz.seansun.rambutan.autoconfig.wxmp.basic
 
-import me.chanjar.weixin.mp.api.WxMpConfigStorage
 import me.chanjar.weixin.mp.api.WxMpService
 import me.chanjar.weixin.mp.api.impl.WxMpServiceImpl
-import org.apache.juli.logging.LogFactory
+import me.chanjar.weixin.mp.config.WxMpConfigStorage
+import org.slf4j.LoggerFactory
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
 import org.springframework.context.annotation.Bean
@@ -18,7 +18,7 @@ import org.springframework.context.annotation.Import
 @ConditionalOnProperty(prefix = "wechat.mp", name = ["app-id", "secret"])
 @Import(JedisStorageConfig::class, InMemoryStorageConfig::class)
 class WxMpBasicAutoConfig {
-    private val log = LogFactory.getLog(javaClass)
+    private val log = LoggerFactory.getLogger(javaClass)
     @Bean
     @ConditionalOnMissingBean(WxMpService::class)
     fun wxMpService(wxMpConfigStorage: WxMpConfigStorage): WxMpService {

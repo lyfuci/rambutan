@@ -1,6 +1,6 @@
 package xyz.seansun.rambutan.handler
 
-import org.apache.juli.logging.LogFactory
+import org.slf4j.LoggerFactory
 import org.springframework.security.core.AuthenticationException
 import org.springframework.security.web.authentication.AuthenticationFailureHandler
 import javax.servlet.http.HttpServletRequest
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse
  */
 class RumbutanAuthenticationFailureHandler : AuthenticationFailureHandler {
 
-    private val log = LogFactory.getLog(javaClass)
+    private val log = LoggerFactory.getLogger(javaClass)
     override fun onAuthenticationFailure(
         request: HttpServletRequest?,
         response: HttpServletResponse?,

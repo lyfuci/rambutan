@@ -2,7 +2,7 @@ package xyz.seansun.rambutan.autoconfig.wxmp.security
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import me.chanjar.weixin.mp.api.WxMpService
-import org.apache.juli.logging.LogFactory
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
@@ -40,7 +40,7 @@ import java.nio.charset.StandardCharsets
 @ConditionalOnBean(ObjectMapper::class)
 class WxMpSecurityConfig : WebSecurityConfigurerAdapter() {
 
-    private val log = LogFactory.getLog(javaClass)
+    private val log = LoggerFactory.getLogger(javaClass)
 
     @Autowired
     lateinit var wxMpProp: WxMpProp

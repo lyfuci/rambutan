@@ -2,7 +2,7 @@ package xyz.seansun.rambutan.autoconfig.wxmp.entrypoint
 
 import me.chanjar.weixin.mp.api.WxMpMessageRouter
 import me.chanjar.weixin.mp.api.WxMpService
-import org.apache.juli.logging.LogFactory
+import org.slf4j.LoggerFactory
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
@@ -19,7 +19,7 @@ import xyz.seansun.rambutan.service.impl.DefaultWxMpMessageEntrypointService
 @ConditionalOnProperty(prefix = "wechat.mp", name = ["token", "entrypoint-url"])
 @ConditionalOnBean(WxMpService::class)
 class EntryPointAutoConfig {
-    private val log = LogFactory.getLog(javaClass)
+    private val log = LoggerFactory.getLogger(javaClass)
 
     @Bean
     @ConditionalOnMissingBean(WxMpMessageRouter::class)

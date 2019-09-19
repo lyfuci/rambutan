@@ -1,7 +1,7 @@
 package xyz.seansun.rambutan.autoconfig.wxmp.basic
 
-import me.chanjar.weixin.mp.api.WxMpConfigStorage
-import me.chanjar.weixin.mp.api.WxMpInRedisConfigStorage
+import me.chanjar.weixin.mp.config.WxMpConfigStorage
+import me.chanjar.weixin.mp.config.impl.WxMpRedisConfigImpl
 import org.slf4j.LoggerFactory
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
@@ -51,7 +51,7 @@ class JedisStorageConfig {
         if (ObjectUtils.isEmpty(wxMpProp.appId) || ObjectUtils.isEmpty(wxMpProp.secret)) {
             throw RuntimeException("appid、secret都不能为空")
         }
-        val wxMpConfigStorage = WxMpInRedisConfigStorage(jedisPool)
+        val wxMpConfigStorage = WxMpRedisConfigImpl(jedisPool)
 
         wxMpConfigStorage.appId = wxMpProp.appId
         wxMpConfigStorage.secret = wxMpProp.secret

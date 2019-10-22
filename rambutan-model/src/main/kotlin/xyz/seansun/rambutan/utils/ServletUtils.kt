@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletRequest
 class ServletUtils {
     companion object {
         private const val unknown = "unknown"
+        /**
+         * 从一系列头中间获取ip信息
+         */
         fun getIpAddress(request: HttpServletRequest): String? {
             return sequenceOf(
                 "x-forwarded-for",

@@ -1,7 +1,6 @@
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:${kotlin_version}"
     compile "org.jetbrains.kotlin:kotlin-reflect:${kotlin_version}"
-    compile "com.fasterxml.jackson.module:jackson-module-kotlin:${kotlin_jackson_version}"
     compile 'org.springframework.boot:spring-boot-starter-web'
     compile 'org.springframework.boot:spring-boot-starter-security'
     compile "com.github.binarywang:weixin-java-mp:${wx_java_version}"

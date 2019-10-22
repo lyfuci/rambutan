@@ -55,6 +55,9 @@ class WxMpProp {
      */
     val authentication = WxMpAuthenticationProp()
 
+    /**
+     * 微信认证相关属性
+     */
     class WxMpAuthenticationProp {
         /**
          * 是否开启认证
@@ -91,6 +94,9 @@ class WxMpProp {
 
     }
 
+    /**
+     * 一个授权对象包括访问路径和方法
+     */
     data class AuthorizedRequest(
         /**
          * 访问路径

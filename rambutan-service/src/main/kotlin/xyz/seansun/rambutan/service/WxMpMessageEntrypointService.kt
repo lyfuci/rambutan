@@ -6,6 +6,9 @@ package xyz.seansun.rambutan.service
  * on : 2019/6/9 1:10
  */
 interface WxMpMessageEntrypointService {
+    /**
+     * 验证微信公众号签名
+     */
     fun verifySignature(
         signature: String?,
         timestamp: String?,
@@ -13,6 +16,9 @@ interface WxMpMessageEntrypointService {
         echoStr: String?
     ): String
 
+    /**
+     * 验证微信公众号消息
+     */
     fun dealMsg(
         requestBody: String,
         signature: String,

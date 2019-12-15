@@ -57,14 +57,14 @@ allprojects {
     compileKotlin {
         kotlinOptions {
             freeCompilerArgs = ["-Xjsr305=strict"]
-            jvmTarget = JavaVersion.VERSION_11
+            jvmTarget = JavaVersion.VERSION_1_8
         }
     }
 
     compileTestKotlin {
         kotlinOptions {
             freeCompilerArgs = ["-Xjsr305=strict"]
-            jvmTarget = JavaVersion.VERSION_11
+            jvmTarget = JavaVersion.VERSION_1_8
         }
     }
 
@@ -93,7 +93,7 @@ allprojects {
                     description = '基于spring security和WxJava的开箱即用服务号starter'
                     url = 'https://gitee.com/lyfuci/Rambutan'
                     name = project.name
-                    
+
                     licenses {
                         license {
                             name = 'The Apache License, Version 2.0'
@@ -122,8 +122,8 @@ allprojects {
                 def releasesRepoUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2"
                 def snapshotsRepoUrl = "https://oss.sonatype.org/content/repositories/snapshots"
                 credentials  {
-                    username = project.property("sonatype.username") ?: System.getenv('SONATYPE_USERNAME')
-                    password = project.property("sonatype.password") ?: System.getenv('SONATYPE_PASSWORD')
+                    username = project.hasProperty("sonatype.username") ? project.property("sonatype.username") : System.getenv('SONATYPE_USERNAME')
+                    password = project.hasProperty("sonatype.password") ? project.property("sonatype.password") : System.getenv('SONATYPE_PASSWORD')
                 }
 //                阿里云
 //                def releasesRepoUrl = "https://repo.rdc.aliyun.com/repository/75943-release-CfALSh/"

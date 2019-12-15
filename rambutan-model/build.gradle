@@ -1,7 +1,7 @@
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib:${kotlin_version}"
-    compile "org.jetbrains.kotlin:kotlin-reflect:${kotlin_version}"
+    compile "org.jetbrains.kotlin:kotlin-stdlib"
+    compile "org.jetbrains.kotlin:kotlin-reflect"
     compile 'org.springframework.boot:spring-boot-starter-web'
     compile 'org.springframework.boot:spring-boot-starter-security'
-    compile "com.github.binarywang:weixin-java-mp:${wx_java_version}"
+    compile "com.github.binarywang:weixin-java-mp"
 }

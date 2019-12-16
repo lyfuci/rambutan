@@ -1,4 +1,4 @@
-rootProject.name = 'rumbutan'
+rootProject.name = 'rambutan'
 
 include ':rambutan-model'
 include ':rambutan-service'

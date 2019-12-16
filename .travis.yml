@@ -4,9 +4,9 @@ jdk:
 os: linux
 dist: xenial
 before_install:
-  - openssl aes-256-cbc -K $encrypted_939758dccff7_key -iv $encrypted_939758dccff7_iv
-    -in .travis/secring.gpg.enc -out .travis/secring.gpg -d
-  - chmod +x gradlew
+- openssl aes-256-cbc -K $encrypted_939758dccff7_key -iv $encrypted_939758dccff7_iv
+  -in secring.gpg.enc -out .travis\\secring.gpg -d
+- chmod +x gradlew
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
   - rm -fr $HOME/.gradle/caches/*/plugin-resolution/

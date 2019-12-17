@@ -1,6 +1,7 @@
 ## WxJava mp + spring security 的spring boot starter 
 [![Maven Central](https://img.shields.io/maven-central/v/xyz.seansun/rambutan-spring-boot-starter.svg)](https://gitee.com/lyfuci/Rambutan) 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/f003a15557a2423cade8fad04a2b6327)](https://www.codacy.com/manual/lyfuci/rambutan?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=lyfuci/rambutan&amp;utm_campaign=Badge_Grade)
+[![Build Status](https://travis-ci.com/lyfuci/rambutan.svg?branch=master)](https://travis-ci.com/lyfuci/rambutan)
 
 该项目主要致力于降低微信服务号开发难度，提高服务号开发的安全性，在spring-boot-starter-web项目中，一个最简单的配置可能如下所示，即完成了公众号的服务接入。
 
@@ -10,7 +11,7 @@
         <dependency>
             <groupId>xyz.seansun</groupId>
             <artifactId>rambutan-spring-boot-starter</artifactId>
-            <version>1.0.0</version>
+            <version>1.0.3</version>
         </dependency>
 ```
 

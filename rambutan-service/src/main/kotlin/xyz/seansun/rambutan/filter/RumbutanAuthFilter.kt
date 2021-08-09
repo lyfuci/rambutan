@@ -5,11 +5,10 @@ import org.springframework.security.web.authentication.AbstractAuthenticationPro
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher
 import xyz.seansun.rambutan.model.WxMpStringToken
 import xyz.seansun.rambutan.utils.ServletUtils
-import java.util.*
 import javax.servlet.http.HttpServletRequest
 
 /**
- * created by <a href="mailto:sunqifu@szunicom.com" > 孙琦夫 </a>
+ * created by <a href="mailto:1194458432@qq.com" > 孙琦夫 </a>
  * on : 2019-07-14 14:13
  */
 abstract class RumbutanAuthFilter : AbstractAuthenticationProcessingFilter {

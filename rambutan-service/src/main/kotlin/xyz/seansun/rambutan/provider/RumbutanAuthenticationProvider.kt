@@ -22,10 +22,11 @@ class RumbutanAuthenticationProvider(val wxMpService: WxMpService) : Authenticat
         //有授权码的请况下直接获取用户相关的信息
         log.debug("使用 code[{}] 获取token", authentication.principal)
 
-        val token = wxMpService.oauth2getAccessToken(authenticationToken.principal as String)
+        val token = wxMpService.oAuth2Service.getAccessToken(authenticationToken.principal as String)
         log.debug("使用 token[{}] 获取用户基本信息", authentication.principal)
 
-        val wxMpUser = wxMpService.oauth2getUserInfo(token, null)
+        val oAuth2UserInfo = wxMpService.oAuth2Service.getUserInfo(token, null)
+        val wxMpUser = wxMpService.userService.userInfo(oAuth2UserInfo.openid)
         log.debug("认证的用户信息[{}]", wxMpUser)
 
         if (ObjectUtils.isEmpty(wxMpUser)) {

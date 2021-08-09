@@ -1,3 +1,8 @@
 dependencies {
-    compile project(':rambutan-service')
+    compileOnly "org.jetbrains.kotlin:kotlin-stdlib"
+    compileOnly "org.jetbrains.kotlin:kotlin-reflect"
+    compileOnly 'org.springframework.boot:spring-boot-starter-web'
+    compileOnly 'org.springframework.boot:spring-boot-starter-security'
+    compileOnly "com.github.binarywang:weixin-java-mp"
+    compileOnly project(':rambutan-service')
 }

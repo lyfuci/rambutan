@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
 /**
- * created by <a href="mailto:sunqifu@szunicom.com" > 孙琦夫 </a>
+ * created by <a href="mailto:1194458432@qq.com" > 孙琦夫 </a>
  * on : 2019-07-14 14:13
  */
 class RumbutanOpenIdAuthenticationFilter : RumbutanAuthFilter {

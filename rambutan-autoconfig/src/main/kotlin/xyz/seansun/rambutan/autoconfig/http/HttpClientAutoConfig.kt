@@ -23,7 +23,7 @@ import org.springframework.util.MimeType
 import org.springframework.web.reactive.function.client.ExchangeStrategies
 import org.springframework.web.reactive.function.client.WebClient
 import reactor.netty.http.client.HttpClient
-import reactor.netty.tcp.ProxyProvider
+import reactor.netty.transport.ProxyProvider
 import xyz.seansun.rambutan.properties.HttpClientProp
 import java.nio.charset.StandardCharsets
 
@@ -43,6 +43,7 @@ import java.nio.charset.StandardCharsets
 class HttpClientAutoConfig {
 
     private val log = LoggerFactory.getLogger(javaClass)
+
     @Autowired
     private lateinit var objectMapper: ObjectMapper
 
@@ -53,29 +54,28 @@ class HttpClientAutoConfig {
         val httpClient: HttpClient
         if (httpClientProp.proxyEnable) {
             httpClient = HttpClient.create()
-                .tcpConfiguration { client ->
-                    client.option(ChannelOption.CONNECT_TIMEOUT_MILLIS, httpClientProp.connectionTimeout)
-                        .doOnConnected { conn ->
-                            conn
-                                .addHandlerLast(ReadTimeoutHandler(httpClientProp.readTime))
-                                .addHandlerLast(WriteTimeoutHandler(httpClientProp.readTime))
-                        }
-                        .proxy { proxyOptions ->
-                            proxyOptions.type(ProxyProvider.Proxy.HTTP)
-                                .host(httpClientProp.proxyIp)
-                                .port(httpClientProp.proxyPort)
-                        }
+                .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, httpClientProp.connectionTimeout)
+                .doOnConnected { conn ->
+                    conn
+                        .addHandlerLast(ReadTimeoutHandler(httpClientProp.readTime))
+                        .addHandlerLast(WriteTimeoutHandler(httpClientProp.readTime))
+                }
+                .proxy { proxyOptions ->
+                    proxyOptions
+                        .type(ProxyProvider.Proxy.HTTP)
+                        .host(httpClientProp.proxyIp)
+                        .port(httpClientProp.proxyPort)
                 }
 
         } else {
             httpClient = HttpClient.create()
-                .tcpConfiguration { client ->
-                    client.option(ChannelOption.CONNECT_TIMEOUT_MILLIS, httpClientProp.connectionTimeout)
-                        .doOnConnected { conn ->
-                            conn
-                                .addHandlerLast(ReadTimeoutHandler(httpClientProp.readTime))
-                                .addHandlerLast(WriteTimeoutHandler(httpClientProp.readTime))
-                        }
+                .option(
+                    ChannelOption.CONNECT_TIMEOUT_MILLIS, httpClientProp.connectionTimeout
+                )
+                .doOnConnected { conn ->
+                    conn
+                        .addHandlerLast(ReadTimeoutHandler(httpClientProp.readTime))
+                        .addHandlerLast(WriteTimeoutHandler(httpClientProp.readTime))
                 }
         }
         val httpConnector = ReactorClientHttpConnector(httpClient)

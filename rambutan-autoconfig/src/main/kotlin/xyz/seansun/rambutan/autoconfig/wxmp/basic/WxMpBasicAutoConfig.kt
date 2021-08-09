@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Import
  */
 @Configuration
 @ConditionalOnProperty(prefix = "wechat.mp", name = ["app-id", "secret"])
-@Import(JedisStorageConfig::class, InMemoryStorageConfig::class)
+@Import(InMemoryStorageConfig::class)
 class WxMpBasicAutoConfig {
     private val log = LoggerFactory.getLogger(javaClass)
     @Bean

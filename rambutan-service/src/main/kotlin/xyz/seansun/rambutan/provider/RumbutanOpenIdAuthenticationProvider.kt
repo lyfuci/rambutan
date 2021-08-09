@@ -11,7 +11,7 @@ import org.springframework.util.ObjectUtils
 import xyz.seansun.rambutan.model.WxMpOpenIdToken
 
 /**
- * created by [ 孙琦夫 ](mailto:sunqifu@szunicom.com)
+ * created by [ 孙琦夫 ](mailto:1194458432@qq.com)
  * on : 2019-02-26 09:36
  */
 class RumbutanOpenIdAuthenticationProvider(val wxMpService: WxMpService) : AuthenticationProvider {
